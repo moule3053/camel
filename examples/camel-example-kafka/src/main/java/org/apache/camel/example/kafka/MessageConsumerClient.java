@@ -51,7 +51,8 @@ public final class MessageConsumerClient {
                         + "&seekTo={{consumer.seekTo}}"
                         + "&groupId={{consumer.group}}")
                         .routeId("FromKafka")
-                    .log("${body}");
+                    .log("${body}")
+                    .to("kafka:{{producer.topic}}?brokers={{kafka.host}}:{{kafka.port}}");
             }
         });
         camelContext.start();
